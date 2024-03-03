@@ -1,29 +1,29 @@
 function test_composite_nodes_basic()
 pause
-disp('Test: Podstawowa funkcjonalność - Start');
+disp('Test: Basic functionality - Start');
 
-% Definiowanie przedziału i liczby podprzedziałów
+% Defining the interval and number of subintervals
 a = 0; b = 3; n = 3;
-disp(['Testowanie dla przedziału [', num2str(a), ', ', num2str(b), ...
-    '] z liczbą podprzedziałów n = ', num2str(n)]);
+disp(['Testing for the interval [', num2str(a), ', ', num2str(b), ...
+    '] with the number of subintervals n = ', num2str(n)]);
 
-% Oczekiwany wynik obliczony ręcznie
+% Expected result calculated manually
 expected_output = [1 1];
-fprintf('Oczekiwany wynik:\n');
+fprintf('Expected result:\n');
 disp(expected_output);
 fprintf('\n');
 
-% Pobieranie rzeczywistego wyniku z funkcji
+% Getting the actual result from the function
 actual_output = get_composite_nodes(a, b, n);
-fprintf('Rzeczywisty wynik:\n');
+fprintf('Actual result:\n');
 disp(actual_output);
 fprintf('\n');
 
-% Sprawdzenie, czy rzeczywisty wynik zgadza się z oczekiwanym
-% Tolerancja jest ustawiona, aby uwzględnić błędy arytmetyki zmiennoprzecinkowej
+% Checking if the actual result matches the expected result
+% Tolerance is set to account for floating-point arithmetic errors
 difference = abs(actual_output - expected_output);
-fprintf('Różnica: [');
+fprintf('Difference: [');
 fprintf(' %.2e ', difference);
 fprintf(']\n');
-fprintf('Test: Podstawowa funkcjonalność - Koniec\n');
+fprintf('Test: Basic functionality - End\n');
 end

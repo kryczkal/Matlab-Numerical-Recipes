@@ -1,31 +1,31 @@
-% Test 3: Duża liczba podprzedziałów
+% Test 3: Large number of sub-intervals
 function test_large_number_of_sub_intervals()
 pause
-fprintf('Test: Duża liczba podprzedziałów - Start\n');
+fprintf('Test: Large number of sub-intervals - Start\n');
 
-% Definiowanie przedziału i ustawienie dużej liczby podprzedziałów
+% Defining the interval and setting a large number of sub-intervals
 a = 0; b = 1; n = 1000;
-fprintf('Testowanie dla przedziału [%d, %d] z liczbą podprzedziałów n = %d.\n', a, b, n);
+fprintf('Testing for the interval [%d, %d] with number of sub-intervals n = %d.\n', a, b, n);
 
-% Pobieranie wyniku z funkcji
+% Getting the result from the function
 actual_output = get_composite_nodes(a, b, n);
-fprintf('Sprawdzanie rozmiaru wyniku:\n');
+fprintf('Checking the size of the output:\n');
 
-% Sprawdzenie, czy funkcja zwraca wynik o odpowiedniej wielkości
+% Checking if the function returns the result of the correct size
 expected_size = [3, n];
 actual_size = size(actual_output);
-fprintf('Oczekiwany rozmiar: [%d %d]\n', expected_size);
-fprintf('Rzeczywisty rozmiar: [%d %d]\n', actual_size);
+fprintf('Expected size: [%d %d]\n', expected_size);
+fprintf('Actual size: [%d %d]\n', actual_size);
 
 assert(all(actual_size == expected_size));
 
-fprintf('Sprawdzanie zakresu wartości węzłów:\n');
-fprintf('(Powinny nie przekraczać zakresu [%d %d])\n', a, b);
-fprintf('Ewalujemy nnz(actual_output(:, :) >= a & actual_output(:, :) <= b\n')
-fprintf("Wartość oczekiwana \n")
+fprintf('Checking the range of node values:\n');
+fprintf('(Should not exceed the range [%d %d])\n', a, b);
+fprintf('Evaluating nnz(actual_output(:, :) >= a & actual_output(:, :) <= b\n')
+fprintf("Expected value \n")
 disp(3000)
-fprintf("Wartość rzeczywista\n")
+fprintf("Actual value\n")
 disp(nnz(actual_output(:, :) >= a & actual_output(:, :) <= b))
 
-fprintf('Test: Duża liczba podprzedziałów - Koniec\n');
+fprintf('Test: Large number of sub-intervals - End\n');
 end

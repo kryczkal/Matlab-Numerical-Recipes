@@ -1,24 +1,24 @@
 function test_single_subinterval()
 pause
-fprintf('Test: Przypadek skrajny z jednym podprzedziałem - Start\n');
-% Definiowanie przedziału i ustawienie liczby podprzedziałów na 1
+fprintf('Test: Extreme case with a single subinterval - Start\n');
+% Defining the interval and setting the number of subintervals to 1
 a = -1; b = 1; n = 1;
-fprintf('Testowanie dla przedziału [%d, %d] z jednym podprzedziałem.\n', a, b);
+fprintf('Testing for the interval [%d, %d] with a single subinterval.\n', a, b);
 
-% Oczekiwany wynik
+% Expected output
 expected_output = [-7.7459666924148337704e-01;
     0.0000000000000000000e+00;
     7.7459666924148337704e-01];
-fprintf('Oczekiwany wynik to standardowe węzły Gaussa-Legendra:\n');
+fprintf('The expected output is the standard Gauss-Legendre nodes:\n');
 fprintf('[%.4f; %.4f; %.4f]\n', expected_output);
 
-% Pobieranie rzeczywistego wyniku z funkcji
+% Getting the actual output from the function
 actual_output = get_composite_nodes(a, b, n);
-fprintf('Rzeczywisty wynik:\n');
+fprintf('The actual output is:\n');
 fprintf('[%.4f; %.4f; %.4f]\n', actual_output);
 
-% Sprawdzenie, czy rzeczywisty wynik zgadza się z oczekiwanym
+% Checking if the actual output matches the expected output
 assert(all(abs(actual_output - expected_output) < 1e-10));
 
-fprintf('Test: Przypadek skrajny z jednym podprzedziałem - Koniec\n');
+fprintf('Test: Extreme case with a single subinterval - End\n');
 end

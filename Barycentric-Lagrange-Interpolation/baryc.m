@@ -1,22 +1,22 @@
-function wagi = baryc(wezly)
-    % Autor: Łukasz Kryczka
-    % Funkcja licząca wagi dla postaci barycentrycznej interpolacji
-    % Lagrange'a
+function weights = baryc(nodes)
+    % Author: Łukasz Kryczka
+    % Function to calculate weights for barycentric Lagrange interpolation
     
-    wagi = zeros(size(wezly));
-    if iscolumn(wezly)
-        wezly=wezly';
+    weights = zeros(size(nodes));
+    if iscolumn(nodes)
+        nodes = nodes';
     end
 
     j = 0;
-    for xj = wezly
-        wspolczynnik = 1;
-        for xi = wezly
+    for xj = nodes
+        coefficient = 1;
+        for xi = nodes
             if (xj == xi)
                 continue
             end
-            wspolczynnik = wspolczynnik * (xj - xi);
+            coefficient = coefficient * (xj - xi);
         end
         j = j + 1;
-        wagi(j) = 1 ./ wspolczynnik;
+        weights(j) = 1 ./ coefficient;
     end
+}

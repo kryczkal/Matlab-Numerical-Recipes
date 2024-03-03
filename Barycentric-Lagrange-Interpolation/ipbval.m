@@ -1,19 +1,19 @@
-function Y = ipbval(X, wezly, wagi, wartosci)
-    % Autor: Łukasz Kryczka
-    % Funkcja licząca wartość wielomianu interpolacyjnego Lagrang'a w
-    % postaci barycentrycznej dla wektora X
+function Y = ipbval(X, nodes, weights, values)
+    % Author: Łukasz Kryczka
+    % Function to calculate the value of the Lagrange interpolation polynomial
+    % in barycentric form for the vector X
     
     gj = 0;
     gj_f_xj = 0;
 
-    for j = 1:length(wagi)
-        gj = gj + wagi(j) ./ (X-wezly(j));
-        gj_f_xj = gj_f_xj + wagi(j) * wartosci(j) ./ (X-wezly(j));
+    for j = 1:length(weights)
+        gj = gj + weights(j) ./ (X-nodes(j));
+        gj_f_xj = gj_f_xj + weights(j) * values(j) ./ (X-nodes(j));
     end
     Y = gj_f_xj ./ gj;
 
-    % x rowne wezla zamieniamy na ich oryginalne wartosci 
-    for i = find(ismember(X, wezly))
-        Y(i) = wartosci(wezly == X(i));
+    % Replace X equal to a node with its original value
+    for i = find(ismember(X, nodes))
+        Y(i) = values(nodes == X(i));
     end
 end

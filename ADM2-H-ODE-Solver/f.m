@@ -1,28 +1,28 @@
 function D = f(x, y, A, B)
-% f - Oblicza pochodne funkcji y w punkcie x
+% f - Computes the derivatives of the function y at point x
 %
-% Funkcja oblicza wartości pochodnych funkcji y w punkcie x, wykorzystując
-% metodę Adamsa-Bashfortha-Moultona. Zwraca wektor pochodnych, gdzie każdy
-% element odpowiada kolejnym pochodnym funkcji y.
+% This function calculates the values of the derivatives of the function y at point x
+% using the Adams-Bashforth-Moulton method. It returns a vector of derivatives, where
+% each element corresponds to the successive derivatives of the function y.
 %
-% Wejście:
-% x      - Wartość zmiennej niezależnej dla obliczanych pochodnych.
-% y      - Wektor wartości y i jej pochodnych do rzędu m-1, w postaci
+% Input:
+% x      - The value of the independent variable for which the derivatives are computed.
+% y      - Vector of values of y and its derivatives up to order m-1, in the form
 %          [y, y', y'', ..., y^{(m-1)}].
-% A      - Tablica komórkowa funkcji a_0, a_1, ..., a_{m-1} w postaci 
+% A      - Cell array of functions a_0, a_1, ..., a_{m-1} in the form
 %          {@a0, @a1, ..., @am-1}.
-% B      - Uchwyt do funkcji b, reprezentujący prawą stronę równania
-%          różniczkowego, przyjmujący x i y.
+% B      - Function handle for the right-hand side of the differential equation,
+%          taking x and y as arguments.
 %
-% Wyjście:
-% D      - Wektor pochodnych y w x. Zawiera pochodne do rzędu m, gdzie
-%          y^{m} jest obliczane z równania: y^{(m)} = (-a_0 y - ... - 
+% Output:
+% D      - Vector of derivatives of y at x. It contains derivatives up to order m,
+%          where y^{m} is calculated from the equation: y^{(m)} = (-a_0 y - ... -
 %          a_{m-1} y^{(m-1)} + B) / a_m.
 %
-% Uwagi:
-% Wartości pochodnych y', ..., y^{(m-1)} są przekazywane jako elementy
-% y. Pochodna y^{(m)} jest obliczana z równania różniczkowego oraz
-% funkcji a_i i B.
+% Notes:
+% The values of derivatives y', ..., y^{(m-1)} are passed as elements of y.
+% The derivative y^{(m)} is calculated from the differential equation and
+% the functions a_i and B.
 
 D = zeros(size(y));
 D(1:end-1) = y(2:end);

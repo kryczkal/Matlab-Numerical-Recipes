@@ -1,9 +1,9 @@
 function y = invpowmult(A,k,x)
-% Autor: Łukasz Kryczka
-% Funkcja licząca przybliżoną wartość x w równianiu A^(-k)  * x
-% poprzez rozwiązanie równania A^(-k) * x = b <==> A^(k) * b = x
-% dla wartości b.
-% AAb = x <==> Ay = x, Ab = y, itd...
+% Author: Łukasz Kryczka
+% Function to calculate the approximate value of x in the equation A^(-k) * x
+% by solving the equation A^(-k) * x = b <==> A^(k) * b = x
+% for the value of b.
+% AAb = x <==> Ay = x, Ab = y, etc...
 y = x;
 A = A';
 for i = 1:k

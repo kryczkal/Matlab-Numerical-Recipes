@@ -1,29 +1,29 @@
-function [Q, err, n_wierszy, wiersz_dol] = smartRM(g, a, b, tol, M0, Kmin, Kmax)
-    % Autor: Łukasz Kryczka
-    % Funkcja licząca całkę z funkcji g, na przedziale a,b, z tolerancją
-    % błedu tol, w adaptacyjny sposób od M0 przedziałów z minimalnie 
-    % Kmin krokami ekstrapolacji i maksymalnie Kmax krokami ekstrapolacji.
+function [Q, err, num_rows, bottom_row] = smartRM(g, a, b, tol, M0, Kmin, Kmax)
+    % Author: Łukasz Kryczka
+    % Function to calculate the integral of function g, on the interval a,b, with error tolerance tol,
+    % using an adaptive approach with M0 intervals, with a minimum of Kmin extrapolation steps
+    % and a maximum of Kmax extrapolation steps.
 
-    H = (b-a)/(M0+1); % liczymy zlozona calke trapezow dla M0+1 przedzialow
-    wiersz_gora = H*(sum(g(a+H:H:b-H))+(g(a)+g(b))/2);
+    H = (b-a)/(M0+1); % calculate composite trapezoidal integral for M0+1 intervals
+    top_row = H*(sum(g(a+H:H:b-H))+(g(a)+g(b))/2);
 
-    err = tol+1; % inicjalizujemy poczatkowa wartosc bledu
-    n_wierszy=2; % zaczynamy ekstrapolacje od 2 wiersza
-    while (err > tol || n_wierszy-1 <= Kmin) && n_wierszy-1 < Kmax+1
-        % liczymy pierwsze wartosci nowego wiersza T(i,0)
-        wiersz_dol = zeros(1,n_wierszy);    
-        H = (b-a)/((M0+1)*2^(n_wierszy-1)); 
-        wiersz_dol(1) = H*(sum(g(a+H:H:b-H))+(g(a)+g(b))/2);
+    err = tol+1; % initialize the initial error value
+    num_rows = 2; % start extrapolation from the 2nd row
+    while (err > tol || num_rows-1 <= Kmin) && num_rows-1 < Kmax+1
+        % calculate the first values of the new row T(i,0)
+        bottom_row = zeros(1,num_rows);    
+        H = (b-a)/((M0+1)*2^(num_rows-1)); 
+        bottom_row(1) = H*(sum(g(a+H:H:b-H))+(g(a)+g(b))/2);
         
-        % ekstrapolujemy kolejne wartosci T(i,k)
-        for k = 2:n_wierszy 
-            wiersz_dol(k) = (4^(k-1)*wiersz_dol(k-1) ...
-                -wiersz_gora(k-1))/(4^(k-1)-1);  
+        % extrapolate the next values T(i,k)
+        for k = 2:num_rows 
+            bottom_row(k) = (4^(k-1)*bottom_row(k-1) ...
+                -top_row(k-1))/(4^(k-1)-1);  
         end
-        % liczymy blad i aktualizujemy wartosci algorytmu
-        err = my_error(wiersz_gora(end),wiersz_dol(end));
-        wiersz_gora = wiersz_dol;
-        n_wierszy = 1 + n_wierszy;
+        % calculate the error and update the algorithm values
+        err = my_error(top_row(end),bottom_row(end));
+        top_row = bottom_row;
+        num_rows = 1 + num_rows;
     end
-    Q = wiersz_dol(end); % najdokladniejsza wartosc to ostatnia z wiersza
-    n_wierszy = n_wierszy-2; % ilosc ekstrapolacji to n_wierszy-2
+    Q = bottom_row(end); % the most accurate value is the last one in the row
+    num_rows = num_rows-2; % the number of extrapolations is num_rows-2

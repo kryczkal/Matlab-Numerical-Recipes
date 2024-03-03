@@ -1,31 +1,31 @@
 function composite_nodes = get_composite_nodes(a, b, n)
-% get_composite_nodes oblicza wektor przeskalowanych węzłów dla 3-punktowej
-% kwadratury Gaussa-Legendre'a dla złożonej kwadratury na przedziale [a, b]
+% get_composite_nodes calculates the vector of scaled nodes for a 3-point
+% Gauss-Legendre composite quadrature on the interval [a, b]
 %
-% Wejście:
-% a, b - granice przedziału całkowania, gdzie a < b, a i b rzeczywiste
-% n    - liczba podprzedziałów, na które przedział [a, b] jest dzielony
-%        liczba naturalna
+% Input:
+% a, b - integration limits, where a < b, a and b are real numbers
+% n    - number of subintervals to divide the interval [a, b] into,
+%        a natural number
 %
-% Wyjście:
-% composite_nodes - macierz węzłów kwadratury Gaussa-Legendre'a
-% Każda kolumna zawiera współczynniki dla odpowiedniego podprzedziału
+% Output:
+% composite_nodes - matrix of Gauss-Legendre quadrature nodes
+% Each column contains the coefficients for the corresponding subinterval
 %
-% Opis:
-% Funkcja get_composite_nodes działa przeskalowując i przesuwając 
-% standardowe węzły kwadratury na każdy z n równych podprzedziałów 
-% przedziału [a, b]. Wykorzystuje standardowe węzły 3-punktowej kwadratury 
-% Gaussa-Legendre'a, skaluje je do rozmiaru każdego podprzedziału, 
-% a następnie przesuwa do odpowiedniej lokalizacji.
+% Description:
+% The get_composite_nodes function scales and shifts the standard quadrature
+% nodes for each of the n equal subintervals of the interval [a, b].
+% It uses the standard nodes of a 3-point Gauss-Legendre quadrature,
+% scales them to the size of each subinterval,
+% and then shifts them to the appropriate location.
 
 single_nodes=[-7.7459666924148337704e-01;
                0.0000000000000000000e+00;
                7.7459666924148337704e-01];
 interval = (b-a)/(n);
-% Stworzenie wektora bazowego do skalowania i przesunięć
+% Create a base vector for scaling and shifting
 base = (a+interval/2):interval:b;
-% Powielenie single_nodes, aby pasowały do długości base
+% Replicate single_nodes to match the length of base
 nodes_replicated = repmat(single_nodes,1,length(base));
-% Skalowanie i przesunięcie single_nodes
+% Scale and shift single_nodes
 composite_nodes = (interval/2)*nodes_replicated+base;
 end

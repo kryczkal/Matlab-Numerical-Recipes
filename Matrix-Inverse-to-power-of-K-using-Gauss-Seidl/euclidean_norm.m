@@ -1,6 +1,6 @@
 function y = euclidean_norm(v)
-% Autor: Łukasz Kryczka
-% funkcja liczaca normę euklidesową wektora
+% Author: Łukasz Kryczka
+% Function to calculate the Euclidean norm of a vector
 
 y  = 0;
 for i = 1:length(v)

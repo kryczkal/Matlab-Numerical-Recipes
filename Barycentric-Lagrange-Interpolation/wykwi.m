@@ -1,20 +1,20 @@
 function wykwi(g,a,b,n)
-    % Autor: Łukasz Kryczka
-    % Funckja generująca wykresy dla wskaźnika na funkcję g, na przedziale
-    % od a do b, dla n+1 węzłów.
+    % Author: Łukasz Kryczka
+    % Function generating plots for the function indicator g, on the interval
+    % from a to b, for n+1 nodes.
 
-    % wygenerowanie wezlow czebyszewa na przedziale od a do b
+    % Generating Chebyshev nodes on the interval from a to b
     i = 0:n;
-    wezly = (a + b) / 2 - ( (b-a)/2 ) .* cos( (2 .* i + 1)...
+    nodes = (a + b) / 2 - ( (b-a)/2 ) .* cos( (2 .* i + 1)...
         .* pi ./ (2 * n + 2) );
     X = linspace(a,b,2000000);
 
-    % wykres funkcji
+    % Plotting the function
     plot(X, g(X), color="b")
     hold on
-    % wykres interpolacji funkcji
-    plot(X, ipbval(X, wezly, baryc(wezly), g(wezly) ), color="r");
-    % wezly zaznaczone na zielono
-    scatter(wezly, g(wezly), 'filled', 'green')
+    % Plotting the interpolation of the function
+    plot(X, ipbval(X, nodes, baryc(nodes), g(nodes) ), color="r");
+    % Nodes marked in green
+    scatter(nodes, g(nodes), 'filled', 'green')
     hold off
 end
