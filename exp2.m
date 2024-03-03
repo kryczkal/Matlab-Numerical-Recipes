@@ -1,16 +1,16 @@
 function y = exp2(X)
-% Funkcja licząca w wartości exp2 dla każdego X
-% W pobliżu 0 używająmy rozwiniecia (1/n!) * x^(n-1) * 2 do 4 elementu
-% Autor: Łukasz Kryczka
+% Function to calculate the value of exp2 for each X
+% Near 0, we use the Taylor expansion (1/n!) * x^(n-1) * 2 up to the 4th term
+% Author: Łukasz Kryczka
 
 col = iscolumn(X);
-% ustawiamy precyzję rozwinięcia taylora na 4 co drugie wartości
+% Set the precision of the Taylor expansion to 4 every other value
 precision = 4;
 coefficients = 0:2:(precision*2)-1;
 factorials = [1 (2:2:(2*precision)-1).*(3:2:(2*(precision)))];
 factorials = cumprod(factorials)./2;
 
-% Kalkulujemy wartości x osobną metodą dla x w otoczeniu 0  
+% Calculate the values of x separately for x in the vicinity of 0
 border_val = 0.05;
 normal_idx = (X >= -25) & (X <= -border_val) | (X >= border_val) & (X <= 25);
 taylor_idx = (X > -border_val) & (X < border_val);
